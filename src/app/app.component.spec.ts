@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Todo } from './todo';
 
 describe('AppComponent', () => {
-  beforeEach(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule
@@ -12,8 +12,8 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
-    });
-  });
+    }).compileComponents();
+  }));
 
   it('should create the app', async(() => {
     let fixture = TestBed.createComponent(AppComponent);
@@ -21,13 +21,13 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   }));
 
-  it(`should have as title 'app'`, async(() => {
+  it('should have a newTodo todo', async(() => {
     let fixture = TestBed.createComponent(AppComponent);
     let app = fixture.debugElement.componentInstance;
     expect(app.newTodo instanceof Todo).toBeTruthy();
   }));
 
-  it('should render title in a h1 tag', async(() => {
+  it('should display "Todos" in h1 tag', async(() => {
     let fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     let compiled = fixture.debugElement.nativeElement;
