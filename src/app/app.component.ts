@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Todo } from './todo';
 import { TodoDataService } from './todo-data.service';
+import { Todo } from './todo';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +8,9 @@ import { TodoDataService } from './todo-data.service';
   styleUrls: ['./app.component.css'],
   providers: [TodoDataService]
 })
+
 export class AppComponent implements OnInit {
+
   todos: Todo[] = [];
 
   constructor(
@@ -38,22 +40,14 @@ export class AppComponent implements OnInit {
   }
 
   onToggleTodoComplete(todo) {
-    this.todoDataService
-      .toggleTodoComplete(todo)
-      .subscribe(
-        (updatedTodo) => {
-          todo = updatedTodo;
-        }
-      );
+    this.todoDataService.toggleTodoComplete(todo)
   }
 
   onRemoveTodo(todo) {
-    this.todoDataService
-      .deleteTodoById(todo.id)
-      .subscribe(
-        (_) => {
-          this.todos = this.todos.filter((t)=> t.id !== todo.id);
-        }
-      );
+    this.todoDataService.deleteTodoById(todo.id)
+  }
+
+  get todos() {
+    return this.todoDataService.getAllTodos();
   }
 }
